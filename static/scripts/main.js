@@ -26,7 +26,8 @@ $(function () {
 
     // Toggle when click an item element
     $('.navigation').on('click', '.title', function (e) {
-        $(this).parent().find('.itemMembers').toggle();
+        $('.itemMembers').hide();
+        $(this).parent().find('.itemMembers').show();
     });
 
     // Show an item related a current documentation automatically
@@ -66,4 +67,10 @@ $(function () {
             document.getElementsByTagName('BODY')[0].appendChild(s);
         });
     }
+
+
 });
+
+var loadInMain = function (url) {
+    $('.main').html(`<div class="wrapper"><iframe id="frame" src="${url}" class="embedded-page"></iframe></div>`);
+};
