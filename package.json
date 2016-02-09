@@ -4,6 +4,8 @@
   "description": "Jaguar.js template for JSDoc 3",
   "main": "Gruntfile.js",
   "dependencies": {
+    "fs-extra": "^0.26.5",
+    "underscore.string": "^3.2.3"
   },
   "devDependencies": {
     "connect-livereload": "~0.3.2",

@@ -2,11 +2,13 @@
 /*global env: true */
 var template = require('jsdoc/template'),
     fs = require('jsdoc/fs'),
+    fs_extra = require('fs-extra'),
     path = require('jsdoc/path'),
     taffy = require('taffydb').taffy,
     handle = require('jsdoc/util/error').handle,
     helper = require('jsdoc/util/templateHelper'),
     _ = require('underscore'),
+    _s = require('underscore.string'),
     htmlsafe = helper.htmlsafe,
     linkto = helper.linkto,
     resolveAuthorLinks = helper.resolveAuthorLinks,
@@ -14,7 +16,8 @@ var template = require('jsdoc/template'),
     hasOwnProp = Object.prototype.hasOwnProperty,
     data,
     view,
-    outdir = env.opts.destination;
+    outdir = env.opts.destination,
+    root = env.pwd;
 
 function find(spec) {
     return helper.find(data, spec);
@@ -202,7 +205,7 @@ function attachModuleSymbols(doclets, modules) {
  */
 function buildNav(members) {
     var nav = [];
-    const namespaces = _.uniq(members.namespaces, 'name');
+    var namespaces = _.uniq(members.namespaces, 'name');
     if (namespaces.length) {
         _.each(namespaces, function (v) {
             nav.push({
@@ -255,6 +258,20 @@ function buildNav(members) {
         });
     }
 
+    if (members.embedded.length) {
+        _.each(members.embedded, function (v) {
+            nav.push({
+                type: 'embedded',
+                longname: v.title,
+                name: v.title,
+                members: [],
+                methods: [],
+                typedefs: [],
+                events: [],
+                links: v.links
+            });
+        });
+    }
     return nav;
 }
 
@@ -269,6 +286,8 @@ exports.publish = function(taffyData, opts, tutorials) {
 
     var conf = env.conf.templates || {};
     conf['default'] = conf['default'] || {};
+
+    var embedded = conf['embedded'] || [];
 
     var templatePath = opts.template;
     view = new template.Template(templatePath + '/tmpl');
@@ -370,9 +389,6 @@ exports.publish = function(taffyData, opts, tutorials) {
         });
     }
 
-    if (sourceFilePaths.length) {
-        sourceFiles = shortenPaths( sourceFiles, path.commonPrefix(sourceFilePaths) );
-    }
     data().each(function(doclet) {
         var url = helper.createLink(doclet);
         helper.registerLink(doclet.longname, url);
@@ -422,7 +438,46 @@ exports.publish = function(taffyData, opts, tutorials) {
     });
 
     var members = helper.getMembers(data);
+    console.log('DATA');
+    console.log('\n');
+    console.log(data);
+    console.log('\n');
+
+    console.log('MEMBERS');
+    console.log('\n');
+    console.log(members);
+    console.log('\n');
+
     members.tutorials = tutorials.children;
+
+
+    // copy and add embedded files
+    members.embedded = [];
+    if (embedded.length > 0) {
+      _.each(embedded, function(item){
+        var sourcePath = path.resolve(root, item.path);
+        var destinationPath = path.resolve(outdir, item.subfolder);
+        if (!fs.statSync(sourcePath).isDirectory()) throw new Error(`Expected embedded path '${sourcePath}' to be a folder`);
+
+        fs_extra.ensureDirSync(destinationPath);
+        fs_extra.copySync(sourcePath, destinationPath);
+
+        var fileFilter = new (require('jsdoc/src/filter')).Filter({includePattern: item.includePattern, excludePattern: item.excludePattern});
+        var fileScanner = new (require('jsdoc/src/scanner')).Scanner();
+        var files = fileScanner.scan([destinationPath], 1, fileFilter);
+        var links = {};
+        _.each(files, function(file){
+          var basename = path.basename(file);
+          var itemName = _s.capitalize(basename.substr(0, basename.lastIndexOf('.')));
+          links[itemName]=path.relative(outdir, file);
+        });
+        members.embedded.push({title: item.title, links: links});
+      });
+    }
+
+    if (sourceFilePaths.length) {
+        sourceFiles = shortenPaths( sourceFiles, path.commonPrefix(sourceFilePaths) );
+    }
 
     // add template helpers
     view.find = find;
@@ -497,7 +552,8 @@ exports.publish = function(taffyData, opts, tutorials) {
             title: title,
             header: tutorial.title,
             content: tutorial.parse(),
-            children: tutorial.children
+            children: tutorial.children,
+            filename: filename
         };
 
         var tutorialPath = path.join(outdir, filename),
