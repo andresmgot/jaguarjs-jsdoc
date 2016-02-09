@@ -13,9 +13,13 @@ var self = this;
     ?>
         <li class="item" data-name="<?js= item.longname ?>">
             <span class="title">
+                <?js if (item.type === 'embedded') { ?>
+                <a href="#"><?js= item.longname ?></a>
+                <?js } else { ?>
                 <?js= self.linkto(item.longname, item.longname) ?>
-                <?js if (item.type === 'namespace') { ?>
+                <?js  if (item.type === 'namespace') { ?>
                 <span class="static">static</span>
+                <?js  } ?>
                 <?js } ?>
             </span>
             <ul class="members itemMembers">
@@ -75,6 +79,37 @@ var self = this;
             }
             ?>
             </ul>
+            <ul class="events itemMembers">
+            <?js
+            if (item.events.length) {
+            ?>
+            <span class="subtitle">Events</span>
+            <?js
+                item.events.forEach(function (v) {
+            ?>
+                <li data-name="<?js= v.longname ?>"><?js= self.linkto(v.longname, v.name) ?></li>
+            <?js
+                });
+            }
+            ?>
+            </ul>
+            <?js
+            if (item.links) {
+            ?>
+            <ul class="links itemMembers">
+
+            <span class="subtitle"><?js= item.title ?></span>
+            <?js
+                for (var index in item.links) {
+            ?>
+                <li data-name="<?js= index ?>"><a href="#" onclick="loadInMain('<?js= item.links[index] ?>')"><?js= index ?></a></li>
+            <?js
+                }
+            ?>
+            </ul>
+            <?js
+              }
+            ?>
         </li>
     <?js }); ?>
     </ul>
