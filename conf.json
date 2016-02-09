@@ -4,6 +4,7 @@
 	},
 	"plugins": ["plugins/markdown"],
 	"templates": {
+		"embedded": [{"path": "./tmp/otherdoc", "title": "NewCategorie", "subfolder": "newcategory", "includePattern": "^.*\\.html$", "excludePattern": "^.*/index.html$"}],
 		"cleverLinks": true,
 		"monospaceLinks": true,
 		"default": {

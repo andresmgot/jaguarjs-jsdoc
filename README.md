@@ -1,9 +1,8 @@
 Jaguar.js template for JSDoc 3
----
-- [Jaguar.js](http://davidshimjs.github.io/jaguarjs)
-- [Jaguar.js Documentations](http://davidshimjs.github.io/jaguarjs/doc)
-- [JSDoc3](https://github.com/jsdoc3/jsdoc)
-- [JSDoc3 API Documentations](http://usejsdoc.org)
+
+Forked from [davidshimjs's jaguarjs](http://davidshimjs.github.io/jaguarjs).
+
+Use with [JSDoc3](https://github.com/jsdoc3/jsdoc).
 
 Usage
 ---
@@ -30,6 +29,7 @@ You can set options for customizing your documentations.
 ```
 "templates": {
     "applicationName": "Demo",
+    "embedded": [{"path": "./tmp/otherdoc", "title": "NewCategorie", "subfolder": "newcategory", "includePattern": "^.*\\.html$", "excludePattern": "^.*/index.html$"}],
     "disqus": "",
     "googleAnalytics": "",
     "openGraph": {
@@ -51,6 +51,3 @@ You can set options for customizing your documentations.
 License
 ---
 This project under the MIT License. and this project refered by default template for JSDoc 3.
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/davidshimjs/jaguarjs-jsdoc/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
