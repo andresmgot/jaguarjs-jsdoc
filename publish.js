@@ -438,18 +438,7 @@ exports.publish = function(taffyData, opts, tutorials) {
     });
 
     var members = helper.getMembers(data);
-    console.log('DATA');
-    console.log('\n');
-    console.log(data);
-    console.log('\n');
-
-    console.log('MEMBERS');
-    console.log('\n');
-    console.log(members);
-    console.log('\n');
-
     members.tutorials = tutorials.children;
-
 
     // copy and add embedded files
     members.embedded = [];
