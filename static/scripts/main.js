@@ -1,4 +1,18 @@
 $(function () {
+
+    var loadInMain = function (url) {
+      $('.main').html(`<div class="wrapper"><iframe id="frame" src="${url}" class="embedded-page"></iframe></div>`);
+    };
+
+    var loadItem = function (item) {
+      var splitted = item.split('~');
+      var url = './'+splitted[0]+'.html';
+      if (splitted.length > 1){
+        url += '#~'+splitted[1]
+      }
+      loadInMain(url);
+    }
+
     // Search Items
     $('#search').on('keyup', function (e) {
         var value = $(this).val();
@@ -24,10 +38,22 @@ $(function () {
         $el.find('.list').scrollTop(0);
     });
 
-    // Toggle when click an item element
-    $('.navigation').on('click', '.title', function (e) {
-        $('.itemMembers').hide();
-        $(this).parent().find('.itemMembers').show();
+    $('.navigation').on('click', '.item', function (e) {
+        var elem = $(this).find('.itemMembers');
+        var wasVisible = elem.is(":visible");
+        if (!wasVisible) {
+          $(this).find('.itemMembers').show();
+          if ($(this).hasClass('loadable')) {
+            loadItem($(this).data('name'));
+          }
+        } else {
+          $(this).find('.itemMembers').hide();
+        }
+    });
+
+    $('.navigation').on('click', '.subitem', function (e) {
+      loadItem($(this).data('name'));
+      e.stopPropagation();
     });
 
     // Show an item related a current documentation automatically
@@ -70,7 +96,3 @@ $(function () {
 
 
 });
-
-var loadInMain = function (url) {
-    $('.main').html(`<div class="wrapper"><iframe id="frame" src="${url}" class="embedded-page"></iframe></div>`);
-};
