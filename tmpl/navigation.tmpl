@@ -101,9 +101,7 @@ var self = this;
 
             <span class="subtitle"><?js= item.title ?></span>
             <?js
-                console.log(item.links);
                 for (var index in item.links) {
-                  console.log(index);
             ?>
               <li class="subitem" data-name="<?js= index ?>"><a target="frame" href="<?js= item.links[index] ?>"><?js= index ?></a></li>
             <?js
