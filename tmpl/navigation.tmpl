@@ -20,7 +20,7 @@ var self = this;
               <?js if (item.type === 'embedded') { ?>
                 <a><?js= item.longname ?></a>
               <?js } else { ?>
-                <a><?js= item.longname ?></a>
+                <a target="frame" href="<?js= self.getUrl(item.longname) ?>"><?js= item.longname ?></a>
               <?js } ?>
             </span>
             <ul class="members itemMembers">

@@ -1,24 +1,5 @@
 /*eslint-disable */
 $(function () {
-
-    var loadInMain = function (url) {
-      var $iframe = $('#frame').attr('src',url);
-    };
-
-    var getUrl = function (item) {
-      var splitted = item.split('~');
-      var url = './'+splitted[0]+'.html';
-      if (splitted.length > 1){
-        url += '#~'+splitted[1]
-      }
-      return url;
-    }
-
-    var loadItem = function (item) {
-      loadInMain(getUrl(item));
-    }
-
-
     // Search Items
     $('#search').on('keyup', function (e) {
         var value = $(this).val();
@@ -49,18 +30,18 @@ $(function () {
         var wasVisible = elem.is(":visible");
         if (!wasVisible) {
           $(this).find('.itemMembers').show();
-          if ($(this).hasClass('loadable')) {
-            loadItem($(this).data('name'));
-          }
+          // if ($(this).hasClass('loadable')) {
+          //   loadItem($(this).data('name'));
+          // }
         } else {
           $(this).find('.itemMembers').hide();
         }
     });
 
     $('.navigation').on('click', '.subitem', function (e) {
-      if ($(this).hasClass('loadable')) {
-        loadItem($(this).data('name'));
-      }
+      // if ($(this).hasClass('loadable')) {
+      //   loadItem($(this).data('name'));
+      // }
       e.stopPropagation();
     });
 
