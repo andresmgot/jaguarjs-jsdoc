@@ -8,110 +8,102 @@ var self = this;
         <input id="search" type="text" class="form-control input-sm" placeholder="Search Documentations">
     </div>
     <ul class="list">
-    <?js
-    this.nav.forEach(function (item) {
-    ?>
-      <?js if (item.type === 'embedded') { ?>
-        <li class="item" data-name="<?js= item.longname ?>">
-      <?js } else { ?>
-        <li class="item loadable" data-name="<?js= item.longname ?>">
-      <?js } ?>
+    <?js this.nav.forEach(function (category) { ?>
+      <li class="category">
+        <span class="header"><?js= category.title ?></span>
+        <ul class="sublist">
+          <?js category.items.forEach(function (item) { ?>
+            <?js if (item.type === 'embedded') { ?>
+              <li class="item" data-name="<?js= item.longname ?>">
+            <?js } else { ?>
+              <li class="item loadable" data-name="<?js= item.longname ?>">
+            <?js } ?>
             <span class="title">
-              <?js if (item.type === 'embedded') { ?>
-                <a><?js= item.longname ?></a>
-              <?js } else { ?>
-                <a><?js= item.longname ?></a>
-              <?js } ?>
+            <?js if (item.type === 'embedded') { ?>
+              <a><?js= item.longname ?></a>
+            <?js } else { ?>
+              <a><?js= item.longname ?></a>
+            <?js } ?>
             </span>
             <ul class="members itemMembers">
-            <?js
-            if (item.members.length) {
-            ?>
-            <span class="subtitle">Members</span>
-            <?js
-                item.members.forEach(function (v) {
-            ?>
-              <li class="subitem" data-name="<?js= v.longname ?>"><a><?js= v.name ?></a></li>
-            <?js
-                });
-            }
-            ?>
+            <?js if (item.members.length) { ?>
+              <span class="subtitle">Members</span>
+              <?js item.members.forEach(function (v) { ?>
+                <li class="subitem" data-name="<?js= v.longname ?>"><a><?js= v.name ?></a></li>
+              <?js }); ?>
+            <?js } ?>
             </ul>
             <ul class="typedefs itemMembers">
-            <?js
-            if (item.typedefs.length) {
-            ?>
-            <span class="subtitle">Typedefs</span>
-            <?js
-                item.typedefs.forEach(function (v) {
-            ?>
-              <li class="subitem" data-name="<?js= v.longname ?>"><a><?js= v.name ?></a></li>
-            <?js
-                });
-            }
-            ?>
+              <?js if (item.typedefs.length) { ?>
+                <span class="subtitle">Typedefs</span>
+                <?js item.typedefs.forEach(function (v) { ?>
+                  <li class="subitem" data-name="<?js= v.longname ?>"><a><?js= v.name ?></a></li>
+                <?js }); ?>
+              <?js } ?>
             </ul>
             <ul class="methods itemMembers">
-            <?js
-            if (item.methods.length) {
-            ?>
-            <span class="subtitle">Methods</span>
-            <?js
-
-                item.methods.forEach(function (v) {
-            ?>
-                <li class="subitem" data-name="<?js= v.longname ?>"><a><?js= v.name ?></a></li>
-            <?js
-                });
-            }
-            ?>
+              <?js if (item.methods.length) { ?>
+                <span class="subtitle">Methods</span>
+                <?js item.methods.forEach(function (v) { ?>
+                  <li class="subitem" data-name="<?js= v.longname ?>"><a><?js= v.name ?></a></li>
+                <?js }); ?>
+              <?js } ?>
             </ul>
             <ul class="events itemMembers">
-            <?js
-            if (item.events.length) {
-            ?>
-            <span class="subtitle">Events</span>
-            <?js
-                item.events.forEach(function (v) {
-            ?>
-              <li class="subitem" data-name="<?js= v.longname ?>"><a><?js= v.name ?></a></li>
-            <?js
-                });
-            }
-            ?>
+              <?js if (item.events.length) { ?>
+                <span class="subtitle">Events</span>
+                <?js item.events.forEach(function (v) { ?>
+                  <li class="subitem" data-name="<?js= v.longname ?>"><a><?js= v.name ?></a></li>
+                <?js }); ?>
+              <?js } ?>
             </ul>
             <ul class="events itemMembers">
-            <?js
-            if (item.events.length) {
-            ?>
-            <span class="subtitle">Events</span>
-            <?js
-                item.events.forEach(function (v) {
-            ?>
-              <li class="subitem" data-name="<?js= v.longname ?>"><a><?js= v.name ?></a></li>
-            <?js
-                });
-            }
-            ?>
+              <?js if (item.events.length) { ?>
+                <span class="subtitle">Events</span>
+                <?js item.events.forEach(function (v) { ?>
+                  <li class="subitem" data-name="<?js= v.longname ?>"><a><?js= v.name ?></a></li>
+                  <?js }); ?>
+              <?js } ?>
             </ul>
-            <?js
-            if (item.links) {
-            ?>
-            <ul class="links itemMembers">
 
-            <span class="subtitle"><?js= item.title ?></span>
-            <?js
-                for (var index in item.links) {
-            ?>
-              <li class="subitem" data-name="<?js= index ?>"><a target="frame" href="<?js= item.links[index] ?>"><?js= index ?></a></li>
-            <?js
-                }
-            ?>
-            </ul>
-            <?js
-              }
-            ?>
-        </li>
+
+
+
+
+
+
+
+
+
+
+                  <?js
+                  if (item.links) {
+                  ?>
+                  <ul class="links itemMembers">
+
+                  <span class="subtitle"><?js= item.title ?></span>
+                  <?js
+                      for (var index in item.links) {
+                  ?>
+                    <li class="subitem" data-name="<?js= index ?>"><a target="frame" href="<?js= item.links[index] ?>"><?js= index ?></a></li>
+                  <?js
+                      }
+                  ?>
+                  </ul>
+                  <?js
+                    }
+                  ?>
+              </li>
+
+
+
+
+
+
+
+          <?js }); ?>
+        </ul>
+      </li>
     <?js }); ?>
     </ul>
 </div>

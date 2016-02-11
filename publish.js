@@ -205,10 +205,11 @@ function attachModuleSymbols(doclets, modules) {
  */
 function buildNav(members) {
     var nav = [];
-    var namespaces = _.uniq(members.namespaces, 'name');
-    if (namespaces.length) {
-        _.each(namespaces, function (v) {
-            nav.push({
+
+    if (members.namespaces.length) {
+        var category = {title: 'Build packages', items: []};
+        _.each(members.namespaces, function (v) {
+            category.items.push({
                 type: 'namespace',
                 longname: v.longname,
                 name: v.name,
@@ -230,11 +231,13 @@ function buildNav(members) {
                 })
             });
         });
+        nav.push(category);
     }
 
     if (members.classes.length) {
+        var category = {title: 'Classes', items: []};
         _.each(members.classes, function (v) {
-            nav.push({
+            category.items.push({
                 type: 'class',
                 longname: v.longname,
                 name: v.name,
@@ -256,11 +259,13 @@ function buildNav(members) {
                 })
             });
         });
+        nav.push(category);
     }
 
     if (members.embedded.length) {
         _.each(members.embedded, function (v) {
-            nav.push({
+            var category = {title: v.title, items: []};
+            category.items.push({
                 type: 'embedded',
                 longname: v.title,
                 name: v.title,
@@ -270,6 +275,7 @@ function buildNav(members) {
                 events: [],
                 links: v.links
             });
+            nav.push(category);
         });
     }
     return nav;
