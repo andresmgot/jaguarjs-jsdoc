@@ -1,8 +1,14 @@
 /*eslint-disable */
 $(function () {
     $('#frame').load(function() {
-      this.style.height = this.contentWindow.document.body.offsetHeight + 'px';
+      $('#frame').css('height', ($(window).height()-50)+'px');
+      $('#frame').css('width', ($(window).width()-$(navigation).css(width))+'px');
     });
+
+    window.onresize = function(event) {
+      $('#frame').css('height', ($(window).height()-50)+'px');
+      $('#frame').css('width', ($(window).width()-$(navigation).css(width))+'px');
+    };
 
     // Search Items
     $('#search').on('keyup', function (e) {

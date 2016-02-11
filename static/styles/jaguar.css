@@ -350,15 +350,14 @@ li.subitem {
   list-style-type: disc;
 }
 .embedded-page {
-  min-width: 100%;
   border: none;
 }
 .wrapper {
   position: relative;
-  padding-bottom: 100%;
 }
 .wrapper iframe {
   position: absolute;
+  padding-bottom: 0;
   top: 0;
   left: 0;
   width: 100%;
