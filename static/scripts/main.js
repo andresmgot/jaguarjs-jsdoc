@@ -1,5 +1,9 @@
 /*eslint-disable */
 $(function () {
+    $('#frame').load(function() {
+      this.style.height = this.contentWindow.document.body.offsetHeight + 'px';
+    });
+
     // Search Items
     $('#search').on('keyup', function (e) {
         var value = $(this).val();
@@ -30,18 +34,12 @@ $(function () {
         var wasVisible = elem.is(":visible");
         if (!wasVisible) {
           $(this).find('.itemMembers').show();
-          // if ($(this).hasClass('loadable')) {
-          //   loadItem($(this).data('name'));
-          // }
         } else {
           $(this).find('.itemMembers').hide();
         }
     });
 
     $('.navigation').on('click', '.subitem', function (e) {
-      // if ($(this).hasClass('loadable')) {
-      //   loadItem($(this).data('name'));
-      // }
       e.stopPropagation();
     });
 
