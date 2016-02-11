@@ -14,7 +14,7 @@ var self = this;
         <ul class="sublist">
           <?js category.items.forEach(function (item) { ?>
             <?js if (item.type === 'embedded') { ?>
-              <li class="item" data-name="<?js= item.longname ?>">
+              <li class="item embedded" data-name="<?js= item.longname ?>" data-link="<?js= item.link ?>">
             <?js } else { ?>
               <li class="item loadable" data-name="<?js= item.longname ?>">
             <?js } ?>
@@ -65,43 +65,8 @@ var self = this;
                   <?js }); ?>
               <?js } ?>
             </ul>
-
-
-
-
-
-
-
-
-
-
-
-                  <?js
-                  if (item.links) {
-                  ?>
-                  <ul class="links itemMembers">
-
-                  <span class="subtitle"><?js= item.title ?></span>
-                  <?js
-                      for (var index in item.links) {
-                  ?>
-                    <li class="subitem" data-name="<?js= index ?>"><a target="frame" href="<?js= item.links[index] ?>"><?js= index ?></a></li>
-                  <?js
-                      }
-                  ?>
-                  </ul>
-                  <?js
-                    }
-                  ?>
-              </li>
-
-
-
-
-
-
-
-          <?js }); ?>
+          </li>
+        <?js }); ?>
         </ul>
       </li>
     <?js }); ?>

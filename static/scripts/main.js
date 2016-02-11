@@ -67,6 +67,7 @@ $(function () {
                     $item.show();
                     $item.closest('.itemMembers').show();
                     $item.closest('.item').show();
+                    $item.closest('.category').show();
                 }
             });
         } else {
@@ -77,22 +78,27 @@ $(function () {
     });
 
     $('.navigation').on('click', '.item', function (e) {
-        var elem = $(this).find('.itemMembers');
+        var el = $(this);
+        var elem = el.find('.itemMembers');
         var wasVisible = elem.is(":visible");
-        if (wasVisible && (isActive($(this)) || !$(this).hasClass('loadable'))) {
-          $(this).find('.itemMembers').hide();
+        if (wasVisible && (isActive(el) || !el.hasClass('loadable'))) {
+          el.find('.itemMembers').hide();
         } else {
-          $(this).find('.itemMembers').show();
-          if ($(this).hasClass('loadable') && !isActive($(this))){
-            loadItem($(this).data('name'));
-            setActive($(this));
+          el.find('.itemMembers').show();
+          if (el.hasClass('loadable') && !isActive(el)){
+            loadItem(el.data('name'));
+            setActive(el);
+          } else if (el.hasClass('embedded')) {
+            loadItem(el.data('link'));
+            setActive(el);
           }
         }
     });
 
     $('.navigation').on('click', '.subitem', function (e) {
-      loadItem($(this).data('name'));
-      setActive($(this).closest('.item'));
+      var el = $(this);
+      loadItem(el.data('name'));
+      setActive(el.closest('.item'));
       e.stopPropagation();
     });
 

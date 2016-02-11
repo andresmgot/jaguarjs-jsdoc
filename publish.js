@@ -265,15 +265,17 @@ function buildNav(members) {
     if (members.embedded.length) {
         _.each(members.embedded, function (v) {
             var category = {title: v.title, items: []};
-            category.items.push({
+            _.each(v.links, function(link, name){
+              category.items.push({
                 type: 'embedded',
-                longname: v.title,
-                name: v.title,
+                longname: name,
+                name: name,
                 members: [],
                 methods: [],
                 typedefs: [],
                 events: [],
-                links: v.links
+                link: link
+              });
             });
             nav.push(category);
         });
