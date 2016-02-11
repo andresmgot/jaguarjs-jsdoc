@@ -71,7 +71,7 @@ $(function () {
     $('.navigation').on('click', '.item', function (e) {
         var elem = $(this).find('.itemMembers');
         var wasVisible = elem.is(":visible");
-        if (wasVisible && isActive($(this))) {
+        if (wasVisible && (isActive($(this)) || !$(this).hasClass('loadable'))) {
           $(this).find('.itemMembers').hide();
         } else {
           $(this).find('.itemMembers').show();
