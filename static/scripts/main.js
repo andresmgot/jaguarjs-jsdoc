@@ -5,16 +5,24 @@ $(function () {
     };
 
     function getUrl(item) {
-      var splitted = item.split('~');
       var url = './'
+      var splitted = item.split('~');
       if (splitted.length > 1){
         url += splitted[0]+'.html';
         url += '#~'+splitted[1];
       } else {
         splitted = item.split('#');
-        url += splitted[0]+'.html';
         if (splitted.length > 1){
-          url += '#'+splitted[1];
+          url += splitted[0]+'.html';
+          if (splitted.length > 1){
+            url += '#'+splitted[1];
+          }
+        } else {
+          splitted = item.split('.');
+          url += splitted[0]+'.html';
+          if (splitted.length > 1){
+            url += '#.'+splitted[1];
+          }
         }
       }
       return url;
