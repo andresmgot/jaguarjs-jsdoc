@@ -1,17 +1,22 @@
 $(function () {
 
     var loadInMain = function (url) {
-      $('.main').html(`<div class="wrapper"><iframe id="frame" src="${url}" class="embedded-page"></iframe></div>`);
+      var $iframe = $('#frame').attr('src',url);
     };
 
-    var loadItem = function (item) {
+    var getUrl = function (item) {
       var splitted = item.split('~');
       var url = './'+splitted[0]+'.html';
       if (splitted.length > 1){
         url += '#~'+splitted[1]
       }
-      loadInMain(url);
+      return url;
     }
+
+    var loadItem = function (item) {
+      loadInMain(getUrl(item));
+    }
+
 
     // Search Items
     $('#search').on('keyup', function (e) {
@@ -52,7 +57,9 @@ $(function () {
     });
 
     $('.navigation').on('click', '.subitem', function (e) {
-      loadItem($(this).data('name'));
+      if ($(this).hasClass('loadable')) {
+        loadItem($(this).data('name'));
+      }
       e.stopPropagation();
     });
 

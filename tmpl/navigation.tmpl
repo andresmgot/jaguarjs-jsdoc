@@ -31,7 +31,7 @@ var self = this;
             <?js
                 item.members.forEach(function (v) {
             ?>
-                <li class="subitem" data-name="<?js= v.longname ?>"><a><?js= v.name ?></a></li>
+              <li class="subitem" data-name="<?js= v.longname ?>"><a target="frame" href="<?js= self.getUrl(v.longname) ?>"><?js= v.name ?></a></li>
             <?js
                 });
             }
@@ -45,7 +45,7 @@ var self = this;
             <?js
                 item.typedefs.forEach(function (v) {
             ?>
-                <li class="subitem" data-name="<?js= v.longname ?>"><?js= self.linkto(v.longname, v.name) ?></li>
+              <li class="subitem" data-name="<?js= v.longname ?>"><a target="frame" href="<?js= self.getUrl(v.longname) ?>"><?js= v.name ?></a></li>
             <?js
                 });
             }
@@ -60,7 +60,7 @@ var self = this;
 
                 item.methods.forEach(function (v) {
             ?>
-                <li class="subitem" data-name="<?js= v.longname ?>"><a><?js= v.name ?></a></li>
+                <li class="subitem" data-name="<?js= v.longname ?>"><a target="frame" href="<?js= self.getUrl(v.longname) ?>"><?js= v.name ?></a></li>
             <?js
                 });
             }
@@ -74,7 +74,7 @@ var self = this;
             <?js
                 item.events.forEach(function (v) {
             ?>
-                <li class="subitem" data-name="<?js= v.longname ?>"><?js= self.linkto(v.longname, v.name) ?></li>
+              <li class="subitem" data-name="<?js= v.longname ?>"><a target="frame" href="<?js= self.getUrl(v.longname) ?>"><?js= v.name ?></a></li>
             <?js
                 });
             }
@@ -88,7 +88,7 @@ var self = this;
             <?js
                 item.events.forEach(function (v) {
             ?>
-                <li class="subitem" data-name="<?js= v.longname ?>"><?js= self.linkto(v.longname, v.name) ?></li>
+              <li class="subitem" data-name="<?js= v.longname ?>"><a target="frame" href="<?js= self.getUrl(v.longname) ?>"><?js= v.name ?></a></li>
             <?js
                 });
             }
@@ -101,9 +101,11 @@ var self = this;
 
             <span class="subtitle"><?js= item.title ?></span>
             <?js
+                console.log(item.links);
                 for (var index in item.links) {
+                  console.log(index);
             ?>
-                <li class="subitem" data-name="<?js= index ?>"><a><?js= index ?></a></li>
+              <li class="subitem" data-name="<?js= index ?>"><a target="frame" href="<?js= item.links[index] ?>"><?js= index ?></a></li>
             <?js
                 }
             ?>

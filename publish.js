@@ -475,6 +475,14 @@ exports.publish = function(taffyData, opts, tutorials) {
     view.tutoriallink = tutoriallink;
     view.htmlsafe = htmlsafe;
     view.members = members; //@davidshimjs: To make navigation for customizing
+    view.getUrl = function (item) {
+      var splitted = item.split('~');
+      var url = './'+splitted[0]+'.html';
+      if (splitted.length > 1){
+        url += '#~'+splitted[1]
+      }
+      return url;
+    };
 
     // once for all
     view.nav = buildNav(members);
