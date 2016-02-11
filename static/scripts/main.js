@@ -1,3 +1,4 @@
+/*eslint-disable */
 $(function () {
 
     var loadInMain = function (url) {
@@ -103,3 +104,4 @@ $(function () {
 
 
 });
+/*eslint-enable */
