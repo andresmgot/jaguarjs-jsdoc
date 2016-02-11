@@ -1,7 +1,7 @@
 <?js
 var self = this;
 ?>
-<div class="navigation">
+<div name="menu" class="navigation">
     <h3 class="applicationName"><a href="index.html"><?js= env.conf.templates.applicationName ?></a></h3>
 
     <div class="search">
@@ -20,7 +20,7 @@ var self = this;
               <?js if (item.type === 'embedded') { ?>
                 <a><?js= item.longname ?></a>
               <?js } else { ?>
-                <a target="frame" href="<?js= self.getUrl(item.longname) ?>"><?js= item.longname ?></a>
+                <a><?js= item.longname ?></a>
               <?js } ?>
             </span>
             <ul class="members itemMembers">
@@ -31,7 +31,7 @@ var self = this;
             <?js
                 item.members.forEach(function (v) {
             ?>
-              <li class="subitem" data-name="<?js= v.longname ?>"><a target="frame" href="<?js= self.getUrl(v.longname) ?>"><?js= v.name ?></a></li>
+              <li class="subitem" data-name="<?js= v.longname ?>"><a><?js= v.name ?></a></li>
             <?js
                 });
             }
@@ -45,7 +45,7 @@ var self = this;
             <?js
                 item.typedefs.forEach(function (v) {
             ?>
-              <li class="subitem" data-name="<?js= v.longname ?>"><a target="frame" href="<?js= self.getUrl(v.longname) ?>"><?js= v.name ?></a></li>
+              <li class="subitem" data-name="<?js= v.longname ?>"><a><?js= v.name ?></a></li>
             <?js
                 });
             }
@@ -60,7 +60,7 @@ var self = this;
 
                 item.methods.forEach(function (v) {
             ?>
-                <li class="subitem" data-name="<?js= v.longname ?>"><a target="frame" href="<?js= self.getUrl(v.longname) ?>"><?js= v.name ?></a></li>
+                <li class="subitem" data-name="<?js= v.longname ?>"><a><?js= v.name ?></a></li>
             <?js
                 });
             }
@@ -74,7 +74,7 @@ var self = this;
             <?js
                 item.events.forEach(function (v) {
             ?>
-              <li class="subitem" data-name="<?js= v.longname ?>"><a target="frame" href="<?js= self.getUrl(v.longname) ?>"><?js= v.name ?></a></li>
+              <li class="subitem" data-name="<?js= v.longname ?>"><a><?js= v.name ?></a></li>
             <?js
                 });
             }
@@ -88,7 +88,7 @@ var self = this;
             <?js
                 item.events.forEach(function (v) {
             ?>
-              <li class="subitem" data-name="<?js= v.longname ?>"><a target="frame" href="<?js= self.getUrl(v.longname) ?>"><?js= v.name ?></a></li>
+              <li class="subitem" data-name="<?js= v.longname ?>"><a><?js= v.name ?></a></li>
             <?js
                 });
             }

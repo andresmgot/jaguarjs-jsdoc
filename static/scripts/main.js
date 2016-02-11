@@ -1,13 +1,39 @@
 /*eslint-disable */
 $(function () {
+    function loadInMain(url) {
+      var $iframe = $('#frame').attr('src', url);
+    };
+
+    function getUrl(item) {
+      var splitted = item.split('~');
+      var url = './' + splitted[0] + '.html';
+      if (splitted.length > 1) {
+        url += '#~' + splitted[1]
+      }
+      return url;
+    }
+
+    function loadItem(item) {
+      loadInMain(getUrl(item));
+    }
+
+    function setActive(item) {
+      $('.item').removeClass('activeView');
+      item.addClass('activeView');
+    }
+
+    function isActive(item) {
+      return item.hasClass('activeView');
+    }
+
     $('#frame').load(function() {
       $('#frame').css('height', ($(window).height()-50)+'px');
-      $('#frame').css('width', ($(window).width()-$(navigation).css(width))+'px');
+      $('#frame').css('width', ($(window).width()-$('.navigation').css('width'))+'px');
     });
 
     window.onresize = function(event) {
       $('#frame').css('height', ($(window).height()-50)+'px');
-      $('#frame').css('width', ($(window).width()-$(navigation).css(width))+'px');
+      $('#frame').css('width', ($(window).width()-$('.navigation').css('width'))+'px');
     };
 
     // Search Items
@@ -38,14 +64,20 @@ $(function () {
     $('.navigation').on('click', '.item', function (e) {
         var elem = $(this).find('.itemMembers');
         var wasVisible = elem.is(":visible");
-        if (!wasVisible) {
-          $(this).find('.itemMembers').show();
-        } else {
+        if (wasVisible && isActive($(this))) {
           $(this).find('.itemMembers').hide();
-        }
+        } else {
+          $(this).find('.itemMembers').show();
+          if ($(this).hasClass('loadable') && !isActive($(this))){
+            loadItem($(this).data('name'));
+            setActive($(this));
+          }
+        }  
     });
 
     $('.navigation').on('click', '.subitem', function (e) {
+      loadItem($(this).data('name'));
+      setActive($(this).closest('.item'));
       e.stopPropagation();
     });
 

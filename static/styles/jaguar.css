@@ -94,6 +94,12 @@ li.subitem {
   color: #779c34;
   display: block;
 }
+.activeView a {
+  text-decoration: underline;
+}
+.activeView .subitem a {
+  text-decoration: none;
+}
 .navigation li.item ul > li {
   font-size: 0.7em;
   padding-left: 8px;
