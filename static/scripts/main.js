@@ -71,7 +71,8 @@ $(function () {
                 }
             });
         } else {
-            $el.find('.item, .itemMembers').show();
+            $el.find('li, .item, .itemMembers').hide();
+            $el.find('li, .item').show();
         }
 
         $el.find('.list').scrollTop(0);
