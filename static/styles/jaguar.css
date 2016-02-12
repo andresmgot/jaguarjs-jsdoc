@@ -64,12 +64,14 @@ li {
   color: #fff;
 }
 .navigation li.item .title {
-  cursor: pointer;
   position: relative;
   display: block;
   font-size: 0.8em;
 }
-li.subitem {
+li.item a {
+  cursor: pointer;
+}
+li.subitem a {
   cursor: pointer;
 }
 .navigation li.item .title a {

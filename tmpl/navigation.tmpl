@@ -19,11 +19,7 @@ var self = this;
               <li class="item loadable" data-name="<?js= item.longname ?>">
             <?js } ?>
             <span class="title">
-            <?js if (item.type === 'embedded') { ?>
               <a><?js= item.longname ?></a>
-            <?js } else { ?>
-              <a><?js= item.longname ?></a>
-            <?js } ?>
             </span>
             <ul class="members itemMembers">
             <?js if (item.members.length) { ?>

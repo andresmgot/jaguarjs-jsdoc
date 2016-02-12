@@ -77,8 +77,8 @@ $(function () {
         $el.find('.list').scrollTop(0);
     });
 
-    $('.navigation').on('click', '.item', function (e) {
-        var el = $(this);
+    $('.navigation').on('click', '.item .title a', function (e) {
+        var el = $(this).closest('.item');
         var elem = el.find('.itemMembers');
         var wasVisible = elem.is(":visible");
         if (wasVisible && (isActive(el) || !el.hasClass('loadable'))) {
@@ -95,8 +95,8 @@ $(function () {
         }
     });
 
-    $('.navigation').on('click', '.subitem', function (e) {
-      var el = $(this);
+    $('.navigation').on('click', '.subitem a', function (e) {
+      var el = $(this).closest('.subitem');
       loadItem(el.data('name'));
       setActive(el.closest('.item'));
       e.stopPropagation();
